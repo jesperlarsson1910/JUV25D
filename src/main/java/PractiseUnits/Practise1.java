@@ -1,4 +1,4 @@
-package org.example;
+package PractiseUnits;
 
 import java.io.Console;
 import java.math.BigInteger;
