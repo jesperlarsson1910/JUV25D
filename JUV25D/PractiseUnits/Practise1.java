@@ -7,20 +7,19 @@ import java.util.Random;
 public class Practise1 {
     static void task(int p){
         switch(p){
-            case 1: q1();
-            case 2: q2();
-            case 3: q3();
-            case 4: q4();
-            case 5: q5();
-            case 6: q6();
-            case 7: q7();
-            case 8: q8();
-            case 9: q9();
-            case 10: q10();
-            case 11: q11();
-            case 12: q12();
+            case 1: q1();   break;
+            case 2: q2();   break;
+            case 3: q3();   break;
+            case 4: q4();   break;
+            case 5: q5();   break;
+            case 6: q6();   break;
+            case 7: q7();   break;
+            case 8: q8();   break;
+            case 9: q9();   break;
+            case 10: q10(); break;
+            case 11: q11(); break;
+            case 12: q12(); break;
 
-                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + p);
         }
@@ -88,10 +87,10 @@ public class Practise1 {
         int y = Integer.parseInt(System.console().readLine("Andra nummer: "));
 
         if (x>y){
-            System.out.println("Största nummer är: " + x + "%nMedelvärde är: " + (x+y)/2);
+            System.out.println("Största nummer är: " + x + "\nMedelvärde är: " + (x+y)/2);
         }
         else if (x<y){
-            System.out.println("Största nummer är: " + y + "%nMedelvärde är: " + (x+y)/2);
+            System.out.println("Största nummer är: " + y + "\nMedelvärde är: " + (x+y)/2);
         }
         else{
             System.out.println("Angivna nummer är samma värde: " + x + "\nMedelvärde är: " + y);
