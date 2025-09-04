@@ -2,6 +2,11 @@ package PractiseUnits;
 
 import java.io.Console;
 import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.util.Locale;
 import java.util.Random;
 
 public class Practise1 {
@@ -98,7 +103,40 @@ public class Practise1 {
     }
 
     static void q7(){
+        NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN); nf.setMaximumFractionDigits(2);
 
+        while(true){
+            double netto = 0;
+            try {
+                netto = nf.parse(System.console().readLine("Ange Summa: ")).doubleValue();
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            if(netto>0){
+                while(true) {
+                    int moms = Integer.parseInt(System.console().readLine("Ange Moms: ").replaceAll("[^\\d.]", ""));
+                    if (moms == 6) {
+                        System.out.println("Brutto summa: " + nf.format(netto - (netto/100) * moms) +
+                                " kr\nMoms " + moms + "%\t\t: " + nf.format((netto/100) * moms) +
+                                " kr\nTotal\t\t: " + nf.format(netto) + " kr");
+                        break;
+                    }
+                    else if (moms == 12 || moms == 25) {
+                        System.out.println("Brutto summa: " + nf.format(netto - (netto / 100) * moms) +
+                                " kr\nMoms " + moms + "%\t: " + nf.format((netto / 100) * moms) +
+                                " kr\nTotal\t\t: " + nf.format(netto) + " kr");
+                        break;
+                    }
+                    else {
+                        System.out.println("Ange en korrekt momssats (6%, 12% eller 25%)");
+                    }
+                }
+                break;
+            }
+            else{
+                System.out.println("Ange ett positivt nummer");
+            }
+        }
     }
 
     static void q8(){
