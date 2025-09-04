@@ -1,11 +1,8 @@
 package PractiseUnits;
 
-import java.io.Console;
 import java.math.BigInteger;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.util.Locale;
 import java.util.Random;
 
@@ -115,7 +112,7 @@ public class Practise1 {
             if(netto>0){
                 while(true) {
                     int moms = Integer.parseInt(System.console().readLine("Ange Moms: ").replaceAll("[^\\d.]", ""));
-                    if (moms == 6) {
+                    if (moms == 6) { //for formating, one number need two tabs
                         System.out.println("Brutto summa: " + nf.format(netto - (netto/100) * moms) +
                                 " kr\nMoms " + moms + "%\t\t: " + nf.format((netto/100) * moms) +
                                 " kr\nTotal\t\t: " + nf.format(netto) + " kr");
@@ -140,23 +137,73 @@ public class Practise1 {
     }
 
     static void q8(){
-
+        double grade = 42;
+        double attendance = 11;
+            if (grade>=70.0 && attendance>=80.0){
+                System.out.println("Grattis! Du har klarat kursen.");
+            }
+            else {
+                System.out.println("Tyvärr, du måste göra om kursen.");
+            }
     }
 
     static void q9(){
+        char grade = 'B';
+
+        switch (grade) {
+            case 'A': System.out.println("Utmärkt!"); break;
+            case 'B': System.out.println("Bra Jobbat!"); break;
+            case 'C', 'D' : System.out.println("Godkänt"); break;
+
+            default: System.out.println("Underkänt."); break;
+        }
 
     }
 
     static void q10(){
-
+        calculateAverage(100, 50, 0);
     }
 
     static void q11(){
-
+        for (int x = 1; x < 3; x++) {
+            int a = x;
+            if (a > 1)
+                System.out.println("a > 1 (första)");
+            a--;
+            if (a > 1) {
+                System.out.println("a > 1 (andra)");
+            } else {
+                System.out.println("a <= 1");
+            }
+        }
     }
 
     static void q12(){
+        final char c = 'q';
+        switch( c ) {
+            case 'a':
+                System.out.println("variable is 'a'");
+                break;
+            case 'b':
+                System.out.println("variable is 'b'");
+                break;
+            default:
+                System.out.println("variable is another letter");
+                break;
+        }
+    }
 
+    static double calculateAverage(double num1, double num2, double num3){
+        double averageResult = (num1 + num2 + num3) / 3.0;
+        if (averageResult > 90.0) {
+            System.out.println("Mycket bra jobbat!");}
+        else if (averageResult>=70 && averageResult<=90.0) {
+            System.out.println("Bra jobbat!");
+        }
+        else{
+            System.out.println("Öva lite mer");
+        }
+        return averageResult;
     }
 
 }
