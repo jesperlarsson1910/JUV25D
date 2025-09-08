@@ -89,7 +89,7 @@ public class Practise1 {
         int y = Integer.parseInt(System.console().readLine("Andra nummer: "));
 
         if (x!=y){
-            System.out.println("Största nummer är: " + Math.max(x,y) + "\nMedelvärde är: " + (x+y)/2);
+            System.out.println("Största nummer är: " + Math.max(x,y) + "\nMedelvärde är: " + (double)(x+y)/2);
         }
         else{
             System.out.println("Angivna nummer är samma värde: " + x + "\nMedelvärde är: " + y);
