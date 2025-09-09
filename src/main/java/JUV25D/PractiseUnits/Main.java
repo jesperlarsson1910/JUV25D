@@ -7,11 +7,17 @@ public class Main {
         String key = "y";
         while (!key.equalsIgnoreCase("n")) {
             int p = Integer.parseInt(System.console().readLine("Practise: "));
-            //only 1 practise so far
-            int t = Integer.parseInt(System.console().readLine("Task: "));
-            Practise1.task(t);
+            switch (p) {
+                case 1: Practise1.task(askTask(1)); break;
+                case 2: Practise2.task(askTask(2)); break;
+
+                default: System.out.println("Wrong input"); break;
+            }
 
             key = System.console().readLine("%nContinue? y/n ");
         }
+    }
+    private static int askTask(int practise){
+        return Integer.parseInt(System.console().readLine("Practise " + practise + " Task: "));
     }
 }

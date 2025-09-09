@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Random;
 
 public class Practise1 {
+
     static void task(int p){
         switch(p){
             case 1: q1();   break;
