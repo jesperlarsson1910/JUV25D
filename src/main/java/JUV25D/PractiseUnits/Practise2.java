@@ -1,5 +1,7 @@
 package JUV25D.PractiseUnits;
 
+import java.util.Arrays;
+
 public class Practise2 {
 
     static void task(int p){
@@ -113,19 +115,67 @@ public class Practise2 {
     }
 
     static void q8(){
-
+        int[] numArray = new int[5];
+            for(int i=0; i<5; i++){
+                numArray[i] = (i+1)*10;
+            }
+            for(int j=0; j<5; j++){
+                System.out.println(numArray[j]);
+            }
     }
 
     static void q9(){
+        String message = "Hej Java!";
+        int index = 0;
 
+        while(index<message.length()){
+            System.out.println(message.charAt(index));
+            index++;
+        }
     }
 
     static void q10(){
-
+        int[] numbers = {5, 12, 8, 21, 3};
+        int sum  = 0, biggest = numbers[0], smallest = numbers[0];
+        for(int i=0; i<numbers.length; i++){
+            sum += numbers[i];
+            if(numbers[i]>biggest){
+                biggest = numbers[i];
+            }
+            else if(numbers[i]<smallest){
+                smallest = numbers[i];
+            }
+        }
+        System.out.println("Summa: " + sum);
+        System.out.println("Störstaa: " + biggest);
+        System.out.println("Minsta: " + smallest);
     }
 
     static void q11() {
+        record book(String title, int pages){}
 
+        String[] titles = {"A Tale of Two Cities", "Le Petit Prince", "O Alquimista", "Harry Potter and the Philosopher's Stone", "And Then There Were None", "紅樓夢", "The Hobbit", "Alice's Adventures in Wonderland"};
+        int[] bookPages = {446, 100, 167, 223, 384, 284, 300, 234};
+
+        book[] books = new book[titles.length];
+
+        for(int i=0; i<titles.length; i++){
+            books[i] = new book(titles[i], bookPages[i]);
+        }
+
+        book topBook = books[0];
+
+        for(int i=0; i<books.length; i++){
+            if(books[i].pages>topBook.pages) {
+                topBook = books[i];
+            }
+        }
+
+        for(int i=0; i<books.length; i++){
+            System.out.println(books[i].title + " - " + books[i].pages + " pages");
+        }
+
+        System.out.println("The longest book is: " + topBook.title + " - " + topBook.pages  + " pages");
     }
 
     static void q12(){
