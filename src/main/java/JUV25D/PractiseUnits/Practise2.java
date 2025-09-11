@@ -179,15 +179,49 @@ public class Practise2 {
     }
 
     static void q12(){
+        String abc = System.console().readLine("String: ");
+
+        for (int j=0; j<abc.length(); j++){
+            if(abc.charAt(j)!=abc.charAt(abc.length()-j-1)){
+                System.out.println(abc + " is not a palindrome");
+                break;
+            }
+            else if(j==abc.length()-1){
+                System.out.println(abc + "is a palindrome");
+            }
+        }
 
     }
 
     static void q13(){
+        String abc = System.console().readLine("String: ");
+        String ac = abc.replaceAll("\\s", "");
 
+        for (int j=0; j<ac.length(); j++){
+            if(ac.charAt(j)!=ac.charAt(ac.length()-j-1)){
+                System.out.println(abc + " is not a palindrome");
+                break;
+            }
+            else if(j==ac.length()-1){
+                System.out.println(abc + " is a palindrome");
+            }
+        }
     }
 
     static void q14(){
+        String abc = System.console().readLine("Word 1: ");
+        String xyz = System.console().readLine("Word 2: ");
 
+        char[] abcArray = abc.toCharArray();
+        char[] xyzArray = xyz.toCharArray();
+        Arrays.sort(abcArray);Arrays.sort(xyzArray);
+
+        if(Arrays.equals(abcArray, xyzArray)){
+            System.out.println(abc + " is an anagram for " + xyz);
+        }
+        else{
+            System.out.println(abc + " is not an anagram for " + xyz);
+        }
 
     }
 }
