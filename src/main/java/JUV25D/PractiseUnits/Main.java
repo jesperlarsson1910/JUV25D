@@ -8,10 +8,10 @@ public class Main {
         while (!key.equalsIgnoreCase("n")) {
             int p = Integer.parseInt(System.console().readLine("Practise: "));
             switch (p) {
-                case 1: Practise1.task(askTask(1)); break;
-                case 2: Practise2.task(askTask(2)); break;
+                case 1 -> Practise1.task(askTask(1));
+                case 2 -> Practise2.task(askTask(2));
 
-                default: System.out.println("Wrong input"); break;
+                default -> System.out.println("Wrong input");
             }
 
             key = System.console().readLine("%nContinue? y/n ");
