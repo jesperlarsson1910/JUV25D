@@ -1,0 +1,185 @@
+package JUV25D.PractiseUnits;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+
+public class Practise3 {
+
+    static void task(int p){
+        switch(p){
+            case 1 -> q1();
+            case 2 -> q2();
+            case 3 -> q3();
+            case 4 -> q4();
+            case 5 -> q5();
+            case 6 -> q6();
+            case 7 -> q7();
+            case 8 -> q8();
+            case 9 -> q9();
+            case 10 -> q10();
+            case 11 -> q11();
+            case 12 -> q12();
+            case 13 -> q13();
+            case 14 -> q14();
+            case 15 -> q15();
+            case 16 -> q16();
+            case 17 -> q17();
+            case 18 -> q18();
+            case 19 -> q19();
+            case 20 -> q20();
+
+            default ->
+                throw new IllegalStateException("Unexpected value: " + p);
+        }
+    }
+
+    static void q1(){
+        System.out.println(year("2021-11-02"));
+    }
+
+    static void q2(){
+        System.out.println(daysBetween("2017-08-30", "2017-09-02"));
+    }
+
+    static void q3(){
+        System.out.println(fToC(100));
+    }
+
+    static void q4(){
+        System.out.println(sumAll(100));
+    }
+
+    static void q5(){
+        System.out.println(reverseString(System.console().readLine("String: ")));
+    }
+
+    static void q6(){
+        int n = (int) (Math.random()*1000)+1;
+        if (isPrime(n)){
+            System.out.println(n + " is a prime number");
+        }
+        else  {
+            System.out.println(n + " is not a prime number");
+        }
+    }
+
+    static void q7(){
+        System.out.println(average(1));
+        System.out.println(average(1,2));
+        System.out.println(average(1,2,3));
+        System.out.println(average(1,2,3,4));
+        System.out.println(average(1,2,3,4,5));
+    }
+
+    static void q8(){
+
+    }
+
+    static void q9(){
+
+    }
+
+    static void q10(){
+
+    }
+
+    static void q11() {
+
+    }
+
+    static void q12(){
+
+    }
+
+    static void q13(){
+
+    }
+
+    static void q14(){
+
+    }
+
+    static void q15(){
+
+    }
+
+    static void q16(){
+
+    }
+
+    static void q17(){
+
+    }
+
+    static void q18(){
+
+    }
+
+    static void q19(){
+
+    }
+
+    static void q20(){
+
+    }
+
+    static int year (String date){
+
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).getYear();
+    }
+
+    static long daysBetween (String start, String end){
+        return 2 + LocalDate.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd")).toEpochDay()
+                - LocalDate.parse(start, DateTimeFormatter.ofPattern("yyyy-MM-dd")).toEpochDay();
+    }
+
+    static double fToC (double f){
+        return (((f-32)*5)/9);
+    }
+
+    static int sumAll (int volume){
+        int sum;
+        for(sum = 0; volume > 0; volume--){
+                    sum += volume;
+                }
+        return sum;
+    }
+
+    static String reverseString (String s){
+        StringBuilder sb = new StringBuilder();
+        for (int i = s.length() - 1; i >= 0; i--){
+            sb.append(s.charAt(i));
+        }
+        return sb.toString();
+    }
+
+    static boolean isPrime (int n){
+        if (n == 1) return true;
+        else if (n%2==0) return false;
+        for (int i = 2; i * i <= n; i++){
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+
+    static double average (double a){
+        return a;
+    }
+
+    static double average (double a, double b){
+        return (a + b)/2;
+    }
+
+    static double average (double a, double b, double c){
+        return (a + b + c)/3;
+    }
+
+    static double average (double a, double b, double c, double d){
+        return (a + b + c + d)/4;
+    }
+
+    static double average (double a, double b, double c, double d, double e){
+        return (a + b + c + d + e)/5;
+    }
+}
