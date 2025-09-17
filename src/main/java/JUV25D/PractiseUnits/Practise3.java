@@ -1,10 +1,12 @@
 package JUV25D.PractiseUnits;
 
 import java.lang.reflect.Array;
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class Practise3 {
 
@@ -114,11 +116,24 @@ public class Practise3 {
     }
 
     static void q14(){
+        int length = Integer.parseInt(System.console().readLine("Array length: "));
+        int[] numbers = intArray(length);
+        String[] words = wordArray(length);
+
+
+        System.out.println(Arrays.toString(numbers));
+        System.out.println(Arrays.toString(bubbleSort(numbers)));
+        System.out.println(Arrays.toString(words));
+        System.out.println(Arrays.toString(bubbleSort(words)));
+
 
     }
 
     static void q15(){
+        String[] words = bubbleSort(wordArray(10));
+        String[] words2 = bubbleSort(wordArray(10));
 
+        System.out.println(Arrays.toString(merge(words, words2)));
     }
 
     static void q16(){
@@ -241,7 +256,7 @@ public class Practise3 {
         }
     }
 
-    static <T> T[] copyArray(T[] array){
+    static <E> E[] copyArray(E[] array){
         return Arrays.copyOf(array, array.length);
     }
 
@@ -273,5 +288,92 @@ public class Practise3 {
             }
         }
         return result;
+    }
+    static int[] intArray (int length){
+        int[] numbers = new int[length];
+        String[] words = new String[length];
+
+        for(int i = 0; i < numbers.length; i++){
+            numbers[i] = (int) (Math.random()*i);
+        }
+        return numbers;
+    }
+
+    static String[] wordArray (int length){
+        String[] words = new String[length];
+        StringBuilder builder = new StringBuilder(5);
+        Random random = new Random();
+        for(int i = 0; i < words.length; i++){
+            for(int j = 0; j < 5; j++){
+                builder.append((char) (random.nextInt(65,90)));
+            }
+            words[i] = builder.toString();
+            builder.delete(0, builder.length());
+        }
+        return words;
+    }
+
+
+    static <E extends Comparable<E>> E[] bubbleSort (E[] array){
+        for (int i = 0; i < array.length-1; i++){
+            for (int x = 0; x < array.length - i - 1; x++){
+                if(array[x].compareTo(array[x+1])>0){
+                    E temp = array[x];
+                    array[x] = array[x+1];
+                    array[x+1] = temp;
+                }
+            }
+        }
+        return array;
+    }
+
+    static int[] bubbleSort (int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int x = 0; x < array.length - i - 1; x++) {
+                if (array[x] > array[x+1]) {
+                    int temp = array[x];
+                    array[x] = array[x+1];
+                    array[x+1] = temp;
+                }
+            }
+        }
+        return array;
+    }
+
+    static  <E extends Comparable<E>> E[] merge (E[] array1, E[] array2){
+
+        int longest;
+        int shortest;
+
+        if (array1.length >= array2.length) {
+            longest = array1.length;
+            shortest = array2.length;
+        }
+        else{
+            longest = array2.length;
+            shortest = array1.length;
+        }
+
+        E[] mergedArray = (E[])new Comparable[longest];
+
+        for (int i = 0; i < shortest; i++){
+            if (array1[i].compareTo(array2[i])>0){
+                mergedArray[i] = array1[i];
+            }
+            else{
+                mergedArray[i] = array2[i];
+            }
+        }
+        if(shortest != longest){
+            for (int i = shortest; i < longest; i++) {
+                if (array1.length > array2.length) {
+                 mergedArray[i] = array1[i];
+                }
+                else {
+                mergedArray[i] = array2[i];
+                }
+            }
+        }
+        return mergedArray;
     }
 }
