@@ -1,5 +1,7 @@
 package JUV25D.PractiseUnits;
 
+import java.lang.reflect.Array;
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -73,27 +75,42 @@ public class Practise3 {
     }
 
     static void q8(){
-
+        System.out.println(factorial(10));
     }
 
     static void q9(){
-
+        System.out.println(factorialRecursive(10));
     }
 
     static void q10(){
-
+        System.out.println(fibonacciAtNRecursive(8));
+        System.out.println(fibonacciAtN(8));
     }
 
     static void q11() {
-
+        System.out.println(flipString("abcdef"));
     }
 
     static void q12(){
+        String[] strings = {"a", "b", "c"};
+        String[] stringsCopy = copyArray(strings);
 
+        if (strings == stringsCopy) {
+            System.out.println("We have failed to copy");
+        }
+        else if (Arrays.equals(strings, stringsCopy)) {
+            System.out.println("We have successfully copied");
+        }
+        else {
+            System.out.println("We have failed");
+        }
     }
 
     static void q13(){
-
+        int[] numbers = {1,2,3,4,5,6,7,8,9,10};
+        int number = (int) (Math.random()*numbers.length);
+        System.out.println(number + " > " + Arrays.toString(lessThan(numbers, number)));
+        System.out.println(number + " > " + Arrays.toString(lessThanAlt(numbers, number)));
     }
 
     static void q14(){
@@ -181,5 +198,80 @@ public class Practise3 {
 
     static double average (double a, double b, double c, double d, double e){
         return (a + b + c + d + e)/5;
+    }
+
+    static int factorial (int n){
+        if (n == 0) return 1;
+        for (int i = n-1; i > 0; i--){
+            n *= i;
+        }
+        return n;
+    }
+
+    static int factorialRecursive(int n){
+        if (n == 0) return 1;
+        else return n * factorialRecursive(n-1);
+    }
+
+    static int fibonacciAtNRecursive (int n){
+        if (n == 0) return 0;
+        else if (n == 1) return 1;
+        else {
+            return fibonacciAtNRecursive(n - 1) + fibonacciAtNRecursive(n - 2);
+        }
+    }
+
+    static int fibonacciAtN(int n){
+        if (n <= 1) return n;
+        else{
+            int i = 1; int j = 1;
+            for (int k = 1; k < n-1; k++){
+                i += j;
+                j = i-j;
+            }
+            return i;
+        }
+    }
+
+    static String flipString (String s){
+        if (s.isEmpty() || s.length() == 1) {
+            return s;
+        } else{
+        return flipString(s.substring(1)) +  s.charAt(0);
+        }
+    }
+
+    static <T> T[] copyArray(T[] array){
+        return Arrays.copyOf(array, array.length);
+    }
+
+    //one loop only always returns an array of the same size as the input
+    static int[] lessThan(int[] numbers, int largest){
+        int[] result = new int[numbers.length];
+        for (int i = 0; i < numbers.length; i++){
+            if (numbers[i] < largest){
+                result[i] = numbers[i];
+            }
+        }
+        return result;
+    }
+
+    // takes two loops so we can return a correctly sized array
+    static int[] lessThanAlt(int[] numbers, int largest){
+        int counter = 0;
+        for (int i = 0; i < numbers.length; i++){
+            if (numbers[i] < largest){
+                counter++;
+            }
+        }
+        int[] result = new int[counter];
+        counter = 0;
+        for (int i = 0; i < numbers.length; i++){
+            if (numbers[i] < largest){
+                result[i] = numbers[i];
+                counter++;
+            }
+        }
+        return result;
     }
 }
