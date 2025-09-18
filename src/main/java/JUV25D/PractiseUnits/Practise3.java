@@ -178,15 +178,50 @@ public class Practise3 {
     }
 
     static void q18(){
-
+        int n =  Integer.parseInt(System.console().readLine("Number: "));
+        if(even(n)){
+            System.out.println(n + " is even");
+        }
+        else{
+            System.out.println(n + " is odd");
+        }
     }
 
     static void q19(){
-
+        String[] passwords = new String[3];
+        for (int i = 0; i < passwords.length; i++) {
+            passwords[i] = System.console().readLine("Password " + (i + 1) + ": ");
+        }
+        if(authenticate(passwords[0], passwords[1], passwords[2])){
+            System.out.println("Authenticated");
+        }
+        else{
+            System.out.println("DENIED");
+        }
     }
 
     static void q20(){
+        int count = 1;
+        String input = System.console().readLine("Input: ");
+        String[] inputs = {input};
 
+        while(true){
+            count++;
+            String[] output = inputs;
+            inputs = new String[count];
+            for (int i = 0; i < output.length; i++) {
+                inputs[i] = output[i];
+            }
+            input =  System.console().readLine("Input: ");
+            if(input.length() > inputs[count-2].length()){
+                inputs[count-1] = input;
+            }
+            else{
+                System.out.println(Arrays.toString(output));
+                break;
+            }
+
+        }
     }
 
     static int year (String date){
@@ -483,5 +518,27 @@ public class Practise3 {
             }
         }
         return false;
+    }
+
+    static boolean even (int n){
+        return n % 2 == 0;
+    }
+
+    static boolean authenticate (String pw1, String pw2, String pw3){
+        String[] passwords = {"piggy", "snuff", "bark"};
+        int correct = 0;
+        for (int i = 0; i < passwords.length; i++){
+            if (pw1.equals(passwords[i])
+            || pw2.equals(passwords[i])
+            || pw3.equals(passwords[i])){
+                correct++;
+            }
+        }
+        if(correct == 3){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
