@@ -132,16 +132,49 @@ public class Practise3 {
     static void q15(){
         String[] words = bubbleSort(wordArray(10));
         String[] words2 = bubbleSort(wordArray(10));
-
         System.out.println(Arrays.toString(merge(words, words2)));
+
+        int[] numbers = bubbleSort(intArray(10));
+        int[] numbers2 = bubbleSort(intArray(10));
+        System.out.println(Arrays.toString(merge(numbers, numbers2)));
     }
 
     static void q16(){
+        String[] words = wordArray(20);
+        System.out.println(Arrays.toString(mergeSort(words)));
 
+        int[] numbers = intArray(20);
+        System.out.println(Arrays.toString(mergeSort(numbers)));
     }
 
     static void q17(){
+        String str = System.console().readLine("Letter: ");
 
+        try{
+            if(isVowel(str)){
+                System.out.println(str + " is a vowel");
+            }
+            else{
+                System.out.println(str + " is not a vowel");
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        char ch = System.console().readLine("Letter: ").charAt(0);
+
+        try {
+            if(isVowel(ch)){
+                System.out.println(ch + " is a vowel");
+            }
+            else{
+                System.out.println(ch + " is not a vowel");
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     static void q18(){
@@ -340,40 +373,115 @@ public class Practise3 {
         return array;
     }
 
-    static  <E extends Comparable<E>> E[] merge (E[] array1, E[] array2){
-
-        int longest;
-        int shortest;
-
-        if (array1.length >= array2.length) {
-            longest = array1.length;
-            shortest = array2.length;
-        }
-        else{
-            longest = array2.length;
-            shortest = array1.length;
-        }
-
-        E[] mergedArray = (E[])new Comparable[longest];
-
-        for (int i = 0; i < shortest; i++){
-            if (array1[i].compareTo(array2[i])>0){
-                mergedArray[i] = array1[i];
+    static int[] merge (int[] array1, int[] array2){
+        int[] mergedArray = new int[array1.length + array2.length];
+        int left = array1.length; int right = array2.length;
+        int i = 0, j = 0, k = 0;
+        while (i < left && j < right) {
+            if (array1[i] <= array2[j]) {
+                mergedArray[k++] = array1[i++];
             }
-            else{
-                mergedArray[i] = array2[i];
+            else {
+                mergedArray[k++] = array2[j++];
             }
         }
-        if(shortest != longest){
-            for (int i = shortest; i < longest; i++) {
-                if (array1.length > array2.length) {
-                 mergedArray[i] = array1[i];
-                }
-                else {
-                mergedArray[i] = array2[i];
-                }
-            }
+        while (i < left) {
+            mergedArray[k++] = array1[i++];
+        }
+        while (j < right) {
+            mergedArray[k++] = array2[j++];
         }
         return mergedArray;
+    }
+
+
+    //Generic and supports arrays of different length
+    static  <E extends Comparable<E>> E[] merge (E[] array1, E[] array2){
+        E[] mergedArray = (E[])new Comparable[array1.length + array2.length];
+        int left = array1.length; int right = array2.length;
+        int i = 0, j = 0, k = 0;
+        while (i < left && j < right) {
+            if (array1[i].compareTo(array2[j]) <= 0) {
+                mergedArray[k++] = array1[i++];
+            }
+            else {
+                mergedArray[k++] = array2[j++];
+            }
+        }
+        while (i < left) {
+            mergedArray[k++] = array1[i++];
+        }
+        while (j < right) {
+            mergedArray[k++] = array2[j++];
+        }
+        return mergedArray;
+    }
+
+    static int[] mergeSort (int[] input){
+        if (input.length == 1){
+            return input;
+        }
+        else {
+            int middle = input.length/2;
+            int[] left = new int[middle];
+            int[] right = new int[input.length-middle];
+
+            for (int i = 0; i < middle; i++){
+                left[i] = input[i];
+            }
+            for (int i = middle; i < input.length; i++){
+                right[i-middle] = input[i];
+            }
+
+            return merge(mergeSort(left), mergeSort(right));
+        }
+    }
+
+    static <E extends Comparable<E>> E[] mergeSort (E[] input){
+        if (input.length == 1){
+            return input;
+        }
+        else {
+            int middle = input.length/2;
+            E[] left = (E[]) new Comparable[middle];
+            E[] right = (E[]) new Comparable[input.length-middle];
+
+            for (int i = 0; i < middle; i++){
+                left[i] = input[i];
+            }
+            for (int i = middle; i < input.length; i++){
+                right[i-middle] = input[i];
+            }
+
+            return merge(mergeSort(left), mergeSort(right));
+        }
+    }
+
+    static boolean isVowel(char ch){
+        if (!((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))){
+            throw new IllegalArgumentException("Single latin letter expected");
+        }
+        char[] vowels = {'a','e','i','o','u'};
+        for (char vowel : vowels){
+            if (ch == vowel){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static boolean isVowel(String ch){
+        if (ch.length() > 1
+                || (ch.codePointCount(0, 0) >= 'a' && ch.codePointCount(0, 0) <= 'z')
+                || (ch.codePointCount(0, 0) >= 'A' && ch.codePointCount(0, 0) <= 'Z')){
+            throw new IllegalArgumentException("Single latin letter expected");
+        }
+        char[] vowels = {'a','e','i','o','u'};
+        for (char vowel : vowels){
+            if (ch.charAt(0) == (vowel)){
+                return true;
+            }
+        }
+        return false;
     }
 }
