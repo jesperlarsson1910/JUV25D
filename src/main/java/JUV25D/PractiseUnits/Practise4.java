@@ -77,19 +77,40 @@ public class Practise4 {
     }
 
     static void q9(){
+        Semaphore sem1 = Semaphore.request();
+        Semaphore sem2 = Semaphore.request();
+        Semaphore sem3 = Semaphore.request();
+
+        if(sem3!=null){
+            System.out.println("Semaphore request successful there are " + Semaphore.available() + " available");
+        }
+        else{
+            System.out.println("Semaphore request failed there are " + Semaphore.available() + " available");
+        }
+        sem1.release();
+        sem2.release();
+        sem3 = Semaphore.request();
+
+        if(sem3!=null){
+            System.out.println("Semaphore request successful there are " + Semaphore.available() + " available");
+        }
+        else{
+            System.out.println("Semaphore request failed there are " + Semaphore.available() + " available");
+        }
 
     }
 
     static void q10(){
-
+        q12();
     }
 
     static void q11(){
-
+        q12();
     }
 
     static void q12(){
-
+        PancakeRecipe pancake = new PancakeRecipe(20, 20, 12, 100, 100);
+        pancake.makePancakes();
     }
 
 }
@@ -185,5 +206,66 @@ class Counter{
 
     public void decrement() {
         this.counter--;
+    }
+}
+//very basic semaphore with no concurrent functionality
+class Semaphore{
+    private static int available = 2;
+
+    private Semaphore (){
+
+    }
+
+    public static Semaphore request(){
+        if (available > 0){
+            available--;
+            return new Semaphore();
+        }
+        return null;
+    }
+
+    public void release(){
+        available++;
+    }
+
+    public static int available(){
+        return available;
+    }
+
+}
+
+class PancakeRecipe {
+    public static double flour;
+    public static double milk;
+    public static double egg;
+    public static double salt;
+    public static double butter;
+
+    public PancakeRecipe(double flour, double milk, double egg, double salt, double butter) {
+        PancakeRecipe.flour = flour;
+        PancakeRecipe.milk = milk;
+        PancakeRecipe.egg = egg;
+        PancakeRecipe.salt = salt;
+        PancakeRecipe.butter = butter;
+    }
+
+    public boolean canMakePancakes(){
+        if(flour>=3 && milk>=6 && egg>=3 && salt>=1.5 && butter>=3 ){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void makePancakes(){
+        if(canMakePancakes()){
+            flour -= 3; milk -= 6; egg -= 3; salt -= 1.5; butter -= 3;
+            System.out.println("Pancakes getting cooked");
+            makePancakes();
+        }
+        else {
+            System.out.println("Not enough ingredients left");
+        }
     }
 }
