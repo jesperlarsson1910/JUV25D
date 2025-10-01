@@ -22,21 +22,21 @@ public class Practise4 {
         }
     }
 
-    static Animal q1(){
-        Animal pet = new Animal(System.console().readLine("Species: "),
+    static Animalum q1(){
+        Animalum pet = new Animalum(System.console().readLine("Species: "),
                 System.console().readLine("Name: "),
                 Integer.parseInt(System.console().readLine("Age: ")));
         return pet;
     }
 
     static void q2(){
-        Animal pet = q1();
+        Animalum pet = q1();
         System.out.println("Name: " + pet.name + "\nSpecies: " + pet.species + "\nAge: "  + pet.age);
     }
 
     static void q3(){
-        Animal pet = q1();
-        Animal theLegend = new Animal();
+        Animalum pet = q1();
+        Animalum theLegend = new Animalum();
     }
 
     static void q4(){
@@ -115,18 +115,18 @@ public class Practise4 {
 
 }
 
-class Animal {
+class Animalum {
     public String species;
     public String name;
     public int age;
 
-    public Animal() {
+    public Animalum() {
         this.species = "Bearded Dragon";
         this.name = "Dovhkiin";
         this.age = 10;
     }
 
-    public Animal(String species, String name, int age) {
+    public Animalum(String species, String name, int age) {
         this.species = species;
         this.name = name;
         this.age = age;

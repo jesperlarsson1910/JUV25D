@@ -12,6 +12,7 @@ public class Main {
                 case 2 -> Practise2.task(askTask(2));
                 case 3 -> Practise3.task(askTask(3));
                 case 4 -> Practise4.task(askTask(4));
+                case 5 -> Practise5.task(askTask(5));
 
                 default -> System.out.println("Wrong input");
             }
