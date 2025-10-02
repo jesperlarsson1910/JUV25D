@@ -1,5 +1,7 @@
 package JUV25D.PractiseUnits;
 
+import java.util.ArrayList;
+
 public class Practise5 {
 
     static void task(int p){
@@ -52,11 +54,23 @@ public class Practise5 {
     }
 
     static void q5(){
+        //Vehicle vehicle = new Vehicle("Vehicle maker");
+        Bicycle bicycle = new Bicycle("Bicycle maker");
+        Car car = new Car("Car maker");
+        Boat boat = new Boat("Boat maker");
+        Motorboat motorboat = new Motorboat("Motorboat maker");
+        Sailboat sailboat = new Sailboat("Sailboat maker");
 
+        //vehicle.goTo("Vehicle shop");
+        bicycle.goTo("Bicycle shop");
+        car.goTo("Car shop");
+        boat.goTo("Boat shop");
+        motorboat.goTo("Motorboat shop");
+        sailboat.goTo("Sailboat shop");
     }
 
     static void q6(){
-
+        q5();
     }
 
     static void q7(){
@@ -80,6 +94,15 @@ public class Practise5 {
     }
 
     static void q12(){
+        ArrayList<Noisemaker> noisemakers = new ArrayList<Noisemaker>();
+
+        Snake snake = new Snake("Slang", 2); noisemakers.add(snake);
+        Dog dog = new Dog("Hasse", 5);  noisemakers.add(dog);
+        Robot robot = new Robot();  noisemakers.add(robot);
+
+        for( Noisemaker n : noisemakers ){
+            n.makeNoise();
+        }
 
     }
 
@@ -128,4 +151,148 @@ class Lizard extends Reptile{
         System.out.println(name + " is snacking");
         super.eat();
     }
+}
+
+class Snake extends Reptile implements Noisemaker{
+    private String name;
+    private int age;
+
+    public Snake(String name, int age) {
+        super(name, age);
+        this.name = name;
+        this.age = age;
+    }
+
+    public void makeNoise(){
+        System.out.println(name + " is making noise");
+    }
+}
+
+class Mammal extends Animal
+{
+    private String name;
+    private int age;
+
+    public Mammal(String name, int age)
+    {
+        super(name, age);
+    }
+}
+
+class Dog extends Mammal implements Noisemaker{
+    private String name;
+    private int age;
+
+    public Dog(String name, int age)
+    {
+        super(name, age);
+        this.name = name;
+        this.age = age;
+    }
+
+    public void makeNoise(){
+        System.out.println(name + " is making noise");
+    }
+}
+
+class Cat extends Mammal {
+    private String name;
+    private int age;
+
+    public Cat(String name, int age)
+    {
+        super(name, age);
+    }
+}
+
+abstract class Vehicle {
+    private final String manufacturer;
+
+    public Vehicle(String manufacturer){
+        this.manufacturer = manufacturer;
+    }
+
+    public void goTo(String destination){
+        System.out.println("Färdas till " + destination);
+    }
+}
+
+class Bicycle extends Vehicle {
+
+    public Bicycle(String manufacturer){
+        super(manufacturer);
+    }
+
+    public void goTo(String destination){
+        System.out.println("Färdas med Bicycle till " + destination);
+    }
+}
+
+class Car extends Vehicle {
+
+    public Car(String manufacturer){
+        super(manufacturer);
+    }
+
+    public void goTo(String destination){
+        System.out.println("Färdas med Car till " + destination);
+    }
+}
+
+class Boat extends Vehicle {
+
+    public Boat(String manufacturer){
+        super(manufacturer);
+    }
+
+    public void goTo(String destination){
+        System.out.println("Färdas med Boat till " + destination);
+    }
+}
+
+class Motorboat extends Boat {
+
+    public Motorboat(String manufacturer){
+        super(manufacturer);
+    }
+
+    public void goTo(String destination){
+        System.out.println("Färdas med Motorboat till " + destination);
+    }
+}
+
+class Sailboat extends Boat {
+
+    public Sailboat(String manufacturer){
+        super(manufacturer);
+    }
+
+    public void goTo(String destination){
+        System.out.println("Färdas med Sailboat till " + destination);
+    }
+}
+
+class Robot implements Noisemaker{
+
+    public void makeNoise(){
+        System.out.println("The robot is making noise");
+    }
+}
+
+abstract class AbstractClass{
+
+    abstract void abstractMethod();
+
+}
+
+class AbstractSubClass extends AbstractClass{
+    @Override
+    public void abstractMethod() {
+        System.out.println("Very abstract");
+    }
+}
+
+interface Noisemaker{
+
+    void makeNoise();
 }

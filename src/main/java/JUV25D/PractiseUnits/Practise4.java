@@ -40,7 +40,7 @@ public class Practise4 {
     }
 
     static void q4(){
-        Car myCar = new Car();
+        ACar myCar = new ACar();
         myCar.setModel(System.console().readLine("Model: "));
         myCar.setColor(System.console().readLine("Color: "));
         myCar.setPrice(Integer.parseInt(System.console().readLine("Price: ")));
@@ -49,12 +49,12 @@ public class Practise4 {
     }
 
     static void q5(){
-        Car myCar = new Car();
-        Car myOtherCar = new Car("Delorean", "Silver", 1000);
+        ACar myCar = new ACar();
+        ACar myOtherCar = new ACar("Delorean", "Silver", 1000);
     }
 
     static void q6(){
-        Car myCar = new Car("Delorean", "Silver", 1000);
+        ACar myCar = new ACar("Delorean", "Silver", 1000);
         myCar.halfPrice();
     }
 
@@ -133,16 +133,16 @@ class Animalum {
     }
 }
 
-class Car {
+class ACar {
     private String model;
     private String color;
     private double price;
 
-    public Car() {
+    public ACar() {
 
     }
 
-    public Car(String model, String color, double price) {
+    public ACar(String model, String color, double price) {
         this.model = model;
         this.color = color;
         this.price = price;
