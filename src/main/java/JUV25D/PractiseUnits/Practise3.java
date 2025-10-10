@@ -52,7 +52,7 @@ public class Practise3 {
     }
 
     static void q5(){
-        System.out.println(reverseString(System.console().readLine("String: ")));
+        System.out.println(reverseString(IO.readln("String: ")));
     }
 
     static void q6(){
@@ -113,7 +113,7 @@ public class Practise3 {
     }
 
     static void q14(){
-        int length = Integer.parseInt(System.console().readLine("Array length: "));
+        int length = Integer.parseInt(IO.readln("Array length: "));
         int[] numbers = intArray(length);
         String[] words = wordArray(length);
 
@@ -145,7 +145,7 @@ public class Practise3 {
     }
 
     static void q17(){
-        String str = System.console().readLine("Letter: ");
+        String str = IO.readln("Letter: ");
 
         try{
             if(isVowel(str)){
@@ -159,7 +159,7 @@ public class Practise3 {
             System.out.println(e.getMessage());
         }
 
-        char ch = System.console().readLine("Letter: ").charAt(0);
+        char ch = IO.readln("Letter: ").charAt(0);
 
         try {
             if(isVowel(ch)){
@@ -175,7 +175,7 @@ public class Practise3 {
     }
 
     static void q18(){
-        int n =  Integer.parseInt(System.console().readLine("Number: "));
+        int n =  Integer.parseInt(IO.readln("Number: "));
         if(even(n)){
             System.out.println(n + " is even");
         }
@@ -187,7 +187,7 @@ public class Practise3 {
     static void q19(){
         String[] passwords = new String[3];
         for (int i = 0; i < passwords.length; i++) {
-            passwords[i] = System.console().readLine("Password " + (i + 1) + ": ");
+            passwords[i] = IO.readln("Password " + (i + 1) + ": ");
         }
         if(authenticate(passwords[0], passwords[1], passwords[2])){
             System.out.println("Authenticated");
@@ -199,7 +199,7 @@ public class Practise3 {
 
     static void q20(){
         int count = 1;
-        String input = System.console().readLine("Input: ");
+        String input = IO.readln("Input: ");
         String[] inputs = {input};
 
         while(true){
@@ -209,7 +209,7 @@ public class Practise3 {
             for (int i = 0; i < output.length; i++) {
                 inputs[i] = output[i];
             }
-            input =  System.console().readLine("Input: ");
+            input =  IO.readln("Input: ");
             if(input.length() > inputs[count-2].length()){
                 inputs[count-1] = input;
             }

@@ -1,6 +1,6 @@
 package JUV25D.PractiseUnits;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Practise5 {
 
@@ -13,286 +13,327 @@ public class Practise5 {
             case 5 -> q5();
             case 6 -> q6();
             case 7 -> q7();
-            case 8 -> q8();
-            case 9 -> q9();
-            case 10 -> q10();
-            case 11 -> q11();
-            case 12 -> q12();
 
             default ->
                     throw new IllegalStateException("Unexpected value: " + p);
         }
     }
-
     static void q1(){
-        Animal animal = new Animal("Lasse", 96);
-        Animal lizard  = new Lizard("Lasse", 96);
 
-        if(animal.equals(lizard)){
-            System.out.println("True");
-        }
-        else{
-            System.out.println("False");
-        }
     }
 
     static void q2(){
-        Animal per = new  Lizard("Per", 82);
-
-        per.eat();
-        per.sleep();
+        List<Double> doubleList = new ArrayList<>();
+        for(int i = 0; i < 10; i++){
+            doubleList.add(Math.random()*10.00);
+        }
+        for(double d:doubleList){
+            System.out.println(d);
+        }
     }
 
     static void q3(){
-        Animal ola = new  Lizard("Ola", 4);
+        Dictionary<String, Animal> dict = new Hashtable<>();
 
-        ola.eat();
+        Animal apa = new Animal("Banarne", 10); dict.put("Apa", apa);
+        Animal anka = new Animal("Anders", 50); dict.put("Anka", anka);
+        Animal katt = new Animal("Pelle", 30); dict.put("Katt", katt);
+        Animal ko = new Animal("Mu", 30); dict.put("Ko", ko);
+        Animal aelg = new Animal("Helge", 80); dict.put("Aelg", aelg);
+
     }
 
     static void q4(){
+        String s = IO.readln("Input: ");
+        int n = Integer.parseInt(s);
 
+        Trio trioString = new Trio(s);
+        Trio trioInt = new Trio(n);
+
+        trioString.printClass();
+        trioInt.printClass();
     }
 
     static void q5(){
-        //Vehicle vehicle = new Vehicle("Vehicle maker");
-        Bicycle bicycle = new Bicycle("Bicycle maker");
-        Car car = new Car("Car maker");
-        Boat boat = new Boat("Boat maker");
-        Motorboat motorboat = new Motorboat("Motorboat maker");
-        Sailboat sailboat = new Sailboat("Sailboat maker");
+        Trio trioVehicle = new Trio<>(new Car("Volvo"),new Boat("Stena"), new Bicycle("Kronan"));
 
-        //vehicle.goTo("Vehicle shop");
-        bicycle.goTo("Bicycle shop");
-        car.goTo("Car shop");
-        boat.goTo("Boat shop");
-        motorboat.goTo("Motorboat shop");
-        sailboat.goTo("Sailboat shop");
+        trioVehicle.printClass();
     }
 
     static void q6(){
-        q5();
+        String[] sA = new String[3];
+        for(int i = 0; i < sA.length; i++){
+            sA[i] = IO.readln("Input " + (i+1) + ": ");
+        }
+        Stack myStack = new Stack();
+        for(String s: sA){
+            myStack.push(s);
+        }
+        for(int i = 0; i < 3; i++){
+            System.out.println(myStack.pop());
+            if(myStack.size() == 0){
+                System.out.println("Stack is empty");
+            }
+        }
     }
 
     static void q7(){
+        String[] sA = new String[5];
+        for(int i = 0; i < sA.length; i++){
+            sA[i] = IO.readln("Input " + (i+1) + ": ");
+        }
+        DLList dlList = new DLList();
+        for(String s: sA){
+            dlList.put(s);
+        }
+        System.out.println("Forward");
+        DNode temp = dlList.getFirst();
+        System.out.println(temp.object);
+        for (int i = 0; i < dlList.getSize()-1; i++){
+            temp = temp.getNext();
+            System.out.println(temp.object);
+        }
+        System.out.println("Backward");
+        temp = dlList.getLast();
+        System.out.println(temp.object);
+        for (int i = 0; i < dlList.getSize()-1; i++){
+            temp = temp.getPrevious();
+            System.out.println(temp.object);
+        }
+    }
+}
 
+class Safe {
+    List<Iterable> content = new ArrayList<>();
+
+    public <T extends Iterable> void store(T object){
+        content.add(object);
     }
 
-    static void q8(){
+    public Object retrieve(){
+        if(content.isEmpty())
+            return null;
+        Object retObject = content.get(0);
+        content.remove(0);
+        return retObject;
+    }
+}
 
+class Trio<T>{
+    public T one;
+    public T two;
+    public T three;
+
+    public Trio(T object){
+        this.one = object;
+        this.two = object;
+        this.three = object;
     }
 
-    static void q9(){
-
+    public Trio(Vehicle v1, Vehicle v2, Vehicle v3){
+        this.one = (T) v1;
+        this.two = (T) v2;
+        this.three = (T) v3;
     }
 
-    static void q10(){
+    public void printClass(){
+        System.out.println("one: " + one.getClass());
+        System.out.println("two: " + two.getClass());
+        System.out.println("three: " + three.getClass());
+    }
+}
 
+class Stack<T>{
+    private List<T> list;
+
+    public int size(){
+        return list.size();
     }
 
-    static void q11(){
-
+    public Stack(){
+        list = new ArrayList<>();
     }
 
-    static void q12(){
-        ArrayList<Noisemaker> noisemakers = new ArrayList<Noisemaker>();
+    public void push (T object){
+        list.add(object);
+    }
 
-        Snake snake = new Snake("Slang", 2); noisemakers.add(snake);
-        Dog dog = new Dog("Hasse", 5);  noisemakers.add(dog);
-        Robot robot = new Robot();  noisemakers.add(robot);
+    public T pop(){
+        if(!list.isEmpty()) {
+            return list.remove(0);
+        }
+        return null;
+    }
+}
 
-        for( Noisemaker n : noisemakers ){
-            n.makeNoise();
+class DNode<T>{
+    public DNode previous;
+    public DNode next;
+    public T object;
+
+    public DNode(){
+        previous = null;
+        next = null;
+        object = null;
+    }
+
+    public DNode (T object, DNode previous){
+        this.object = object;
+        this.previous = previous;
+        next = null;
+    }
+
+    public DNode (T object, DNode previous, DNode next){
+        this.object = object;
+        this.previous = previous;
+        this.next = next;
+    }
+
+    public void setNext(DNode next){
+        this.next = next;
+    }
+
+    public void setPrevious(DNode previous){
+        this.previous = previous;
+    }
+
+    public void setObject(T object){
+        this.object = object;
+    }
+
+    public T getObject(){
+        return object;
+    }
+
+    public DNode getPrevious(){
+        return previous;
+    }
+
+    public DNode getNext(){
+        return next;
+    }
+}
+
+class DLList<T>{
+    private int  size;
+    private DNode<T> first;
+    private DNode<T> last;
+
+    public DLList(){
+        first = null;
+        last = null;
+        size = 0;
+    }
+
+    public int getSize(){
+        return size;
+    }
+
+    public boolean isEmpty(){
+        return size == 0;
+    }
+
+    public void put(T  object){
+        if(size == 0){
+            DNode temp = new DNode<>(object, null);
+            first = last = temp;
+            size++;
+        }
+        else{
+            DNode temp = new DNode<>(object, get(size-1));
+            last.setNext(temp);
+            last = temp;
+            size++;
         }
 
     }
 
-}
+    public T getObject(int index){
+        if(index < 0 || index >= size)
+            return null;
 
-class Animal {
-
-    private  String name;
-    private int age;
-
-    public Animal(String name, int age) {
-        this.name = name;
-        this.age = age;
+        else{
+            DNode<T> temp = first;
+            for(int i = 0; i < index; i++){
+            temp = temp.next;}
+            return temp.object;
+        }
     }
 
-    public void  eat(){
-        System.out.println(name + " is eating");
-    }
-    public void sleep(){
-        System.out.println(name + " is sleeping");
-    }
-}
-
-class Reptile extends Animal{
-    private String name;
-    private int age;
-
-    public Reptile(String name, int age) {
-        super(name, age);
-        this.name = name;
-        this.age = age;
-    }
-}
-
-class Lizard extends Reptile{
-    private String name;
-    private int age;
-
-    public Lizard(String name, int age) {
-        super(name, age);
-        this.name = name;
-        this.age = age;
+    public T getFirstObject(){
+        return first.object;
     }
 
-    public void eat(){
-        System.out.println(name + " is snacking");
-        super.eat();
-    }
-}
-
-class Snake extends Reptile implements Noisemaker{
-    private String name;
-    private int age;
-
-    public Snake(String name, int age) {
-        super(name, age);
-        this.name = name;
-        this.age = age;
+    public T getLastObject(){
+        return last.object;
     }
 
-    public void makeNoise(){
-        System.out.println(name + " is making noise");
-    }
-}
+    public DNode get(int index){
+        if(index < 0 || index >= size)
+            return null;
 
-class Mammal extends Animal
-{
-    private String name;
-    private int age;
-
-    public Mammal(String name, int age)
-    {
-        super(name, age);
-    }
-}
-
-class Dog extends Mammal implements Noisemaker{
-    private String name;
-    private int age;
-
-    public Dog(String name, int age)
-    {
-        super(name, age);
-        this.name = name;
-        this.age = age;
+        else{
+            DNode<T> temp = first;
+            for(int i = 0; i < index; i++){
+                temp = temp.next;}
+            return temp;
+        }
     }
 
-    public void makeNoise(){
-        System.out.println(name + " is making noise");
-    }
-}
-
-class Cat extends Mammal {
-    private String name;
-    private int age;
-
-    public Cat(String name, int age)
-    {
-        super(name, age);
-    }
-}
-
-abstract class Vehicle {
-    private final String manufacturer;
-
-    public Vehicle(String manufacturer){
-        this.manufacturer = manufacturer;
+    public DNode getFirst(){
+        return first;
     }
 
-    public void goTo(String destination){
-        System.out.println("Färdas till " + destination);
-    }
-}
-
-class Bicycle extends Vehicle {
-
-    public Bicycle(String manufacturer){
-        super(manufacturer);
+    public DNode getLast(){
+        return last;
     }
 
-    public void goTo(String destination){
-        System.out.println("Färdas med Bicycle till " + destination);
-    }
-}
-
-class Car extends Vehicle {
-
-    public Car(String manufacturer){
-        super(manufacturer);
-    }
-
-    public void goTo(String destination){
-        System.out.println("Färdas med Car till " + destination);
-    }
-}
-
-class Boat extends Vehicle {
-
-    public Boat(String manufacturer){
-        super(manufacturer);
-    }
-
-    public void goTo(String destination){
-        System.out.println("Färdas med Boat till " + destination);
-    }
-}
-
-class Motorboat extends Boat {
-
-    public Motorboat(String manufacturer){
-        super(manufacturer);
+    public void remove(int index){
+        if(index < 0 || index >= size) {
+            //
+        }
+        else if(index == 0){
+            first = first.next;
+            first.previous = null;
+            size--;
+        }
+        else if(index == size - 1){
+            last = last.previous;
+            last.next = null;
+            size--;
+        }
+        else{
+            DNode<T> temp = first;
+            for(int i = 0; i < index; i++){
+                temp = temp.next;
+            }
+            temp.next = temp.previous;
+            temp.previous.next = temp.next;
+            temp.next.previous = temp.previous;
+            size--;
+        }
     }
 
-    public void goTo(String destination){
-        System.out.println("Färdas med Motorboat till " + destination);
-    }
-}
-
-class Sailboat extends Boat {
-
-    public Sailboat(String manufacturer){
-        super(manufacturer);
+    public void clear(){
+        first = null;
+        last = null;
+        size = 0;
     }
 
-    public void goTo(String destination){
-        System.out.println("Färdas med Sailboat till " + destination);
+    public T retrieve(int index){
+        T temp =  getObject(index);
+        remove(index);
+        return temp;
     }
-}
 
-class Robot implements Noisemaker{
-
-    public void makeNoise(){
-        System.out.println("The robot is making noise");
+    public T retrieveFirst(){
+        T temp = getFirstObject();
+        remove(0);
+        return temp;
     }
-}
-
-abstract class AbstractClass{
-
-    abstract void abstractMethod();
-
-}
-
-class AbstractSubClass extends AbstractClass{
-    @Override
-    public void abstractMethod() {
-        System.out.println("Very abstract");
+    public T retrieveLast(){
+        T temp = getLastObject();
+        remove(size - 1);
+        return temp;
     }
-}
-
-interface Noisemaker{
-
-    void makeNoise();
 }
