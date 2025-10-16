@@ -139,33 +139,37 @@ public class Practise7 {
 
     static void q15(){
         var  countries = countryList();
-        Map<Double, List<String>> result = new HashMap<>();
-
         countries.stream()
-                //.sorted(Comparator.comparing(c -> c.name))
-                .collect(Collectors.toMap(k -> (Math.floor(k.population)), v -> List.of("-" + v.name + "\n"), (v1, v2) -> Stream.concat(v1.stream(), v2.stream()).toList())).entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(m -> System.out.println("Countries with " + m.getKey() + " population:\n" + m.getValue().stream().sorted().toList()));
-
-
-        for (Map.Entry<Double, List<String>> entry : result.entrySet()) {
-            System.out.println("Countries with " + entry.getKey() + " population: " + entry.getValue());
-        }
-
+                .collect(Collectors.toMap(k -> (Math.floor(k.population)), v -> List.of("-" + v.name + "\n"), (v1, v2) -> Stream.concat(v1.stream(), v2.stream()).toList())).
+                entrySet().stream().sorted(Map.Entry.comparingByKey()).
+                forEach(m -> System.out.println("Countries with " + m.getKey() + "m population:\n" + m.getValue().stream().sorted().collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)));
     }
 
     static void q16(){
+        var  countries = countryList();
 
+        countries.stream().forEach(v -> System.out.println(v.name + ": " + (int) (v.population * 1000000)));
+
+        countries.stream().sorted(Comparator.comparing(c -> (c.population * 1000000)/c.area)).forEach(c -> System.out.println(c.name + ": " + (int) (c.population * 1000000)/c.area + " people per km2"));
     }
 
     static void q17(){
+        var countries = countryList();
 
+        countries.stream().sorted(Comparator.comparing(c -> new StringBuilder(c.capital).reverse())).forEach(c -> System.out.println(c.name));
     }
 
     static void q18(){
+        var  countries = countryList();
 
+        double low = countries.stream().sorted(Comparator.comparing(CountryStat::area)).limit(6).mapToDouble(CountryStat::population).sum();
+        double high = countries.stream().sorted(Comparator.comparing(CountryStat::area).reversed()).limit(3).mapToDouble(CountryStat::population).sum();
     }
 
     static void q19(){
+        var  countries = countryList();
 
+        double sumPop = countries.stream().filter(c -> c.name.length() == 7).mapToDouble(CountryStat::population).sum();
     }
 
     interface isFirstorLast<T> {
